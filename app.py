@@ -1,6 +1,6 @@
 import streamlit as st
 import numpy as np
-import joblib
+import pickle
 
 st.set_page_config(
     page_title='African Women Body Type & Outfit Recommender',
@@ -37,9 +37,12 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Load model
-best_svm = joblib.load('svm_model.pkl')
-scaler   = joblib.load('scaler.pkl')
-le       = joblib.load('label_encoder.pkl')
+with open('svm_model.pkl', 'rb') as f:
+    best_svm = pickle.load(f)
+with open('scaler.pkl', 'rb') as f:
+    scaler = pickle.load(f)
+with open('label_encoder.pkl', 'rb') as f:
+    le = pickle.load(f)
 
 OUTFITS = {
     'Hourglass': {
